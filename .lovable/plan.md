@@ -24,10 +24,17 @@ Adicionar acompanhamento corporal e de hidratação ao app, além de permitir qu
 - Substituir “Adicionar amanhã” por uma ação de agendamento que salva o treino exatamente no momento escolhido.
 - Exibir o treino imediatamente na semana correspondente do calendário.
 
-### 4. Validação
+### 4. Acesso à ficha do treino
+- Destacar no **Início** o treino gerado agendado para o dia, com ação para abrir sua ficha completa.
+- Tornar as datas da **Semana** interativas; ao tocar em uma data, mostrar os treinos daquele dia.
+- Permitir abrir os detalhes completos dos treinos gerados a partir dessa visualização diária, incluindo exercícios, séries, repetições, descanso e orientações.
+- Manter atividades sem ficha gerada com seus detalhes normais, sem apresentar uma tela vazia.
+
+### 5. Validação
 - Testar atualização de peso e altura, cálculo do IMC e valores incompletos.
 - Testar criação, soma diária e exclusão de registros de água.
 - Testar geração e salvamento de treino em diferentes datas e horários.
+- Testar a abertura da ficha pelo Início e por uma data selecionada na Semana.
 - Conferir as telas em celular e computador e validar as regras de privacidade.
 
 ## Detalhes técnicos
@@ -35,3 +42,4 @@ Adicionar acompanhamento corporal e de hidratação ao app, além de permitir qu
 - Criar `water_intakes` com usuário, quantidade em ml e momento do consumo, incluindo permissões explícitas e políticas por usuário/casal.
 - Calcular o IMC na interface a partir das medidas salvas, sem persistir um valor duplicado.
 - Usar o horário local escolhido e convertê-lo para o formato armazenado pelo calendário.
+- Carregar os detalhes da ficha vinculada ao treino somente para o casal autenticado.
