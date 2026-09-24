@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (search: Record<string, unknown>) => ({ denied: search.denied === "1" ? "1" : undefined }),
+  validateSearch: (search: Record<string, unknown>) => ({ denied: search["denied"] === "1" ? "1" : undefined }),
   head: () => ({ meta: [{ title: "Entrar | Esther & Gabriel" }, { name: "description", content: "Acesso privado ao planejamento de treinos e refeições de Esther e Gabriel." }, { property: "og:title", content: "Entrar | Esther & Gabriel" }, { property: "og:description", content: "Acesso privado ao planejamento de treinos e refeições." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: AuthPage,
 });
 
