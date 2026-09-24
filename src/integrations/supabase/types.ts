@@ -210,10 +210,12 @@ export type Database = {
           equipment: string[]
           fitness_level: string
           goals: string[]
+          height_cm: number | null
           id: string
           preferences: string | null
           restrictions: string | null
           updated_at: string
+          weight_kg: number | null
         }
         Insert: {
           avatar_url?: string | null
@@ -223,10 +225,12 @@ export type Database = {
           equipment?: string[]
           fitness_level?: string
           goals?: string[]
+          height_cm?: number | null
           id: string
           preferences?: string | null
           restrictions?: string | null
           updated_at?: string
+          weight_kg?: number | null
         }
         Update: {
           avatar_url?: string | null
@@ -236,10 +240,12 @@ export type Database = {
           equipment?: string[]
           fitness_level?: string
           goals?: string[]
+          height_cm?: number | null
           id?: string
           preferences?: string | null
           restrictions?: string | null
           updated_at?: string
+          weight_kg?: number | null
         }
         Relationships: []
       }
@@ -260,6 +266,33 @@ export type Database = {
           created_at?: string
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      water_intakes: {
+        Row: {
+          amount_ml: number
+          consumed_at: string
+          created_at: string
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount_ml: number
+          consumed_at?: string
+          created_at?: string
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount_ml?: number
+          consumed_at?: string
+          created_at?: string
+          id?: string
+          updated_at?: string
           user_id?: string
         }
         Relationships: []
