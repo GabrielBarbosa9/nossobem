@@ -14,16 +14,273 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      activities: {
+        Row: {
+          created_at: string
+          created_by: string
+          duration_minutes: number
+          generated_workout_id: string | null
+          id: string
+          modality: string
+          notes: string | null
+          participant_ids: string[]
+          starts_at: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          duration_minutes?: number
+          generated_workout_id?: string | null
+          id?: string
+          modality: string
+          notes?: string | null
+          participant_ids?: string[]
+          starts_at: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          duration_minutes?: number
+          generated_workout_id?: string | null
+          id?: string
+          modality?: string
+          notes?: string | null
+          participant_ids?: string[]
+          starts_at?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "activities_generated_workout_id_fkey"
+            columns: ["generated_workout_id"]
+            isOneToOne: false
+            referencedRelation: "generated_workouts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      activity_checkins: {
+        Row: {
+          absence_reason: string | null
+          activity_id: string
+          created_at: string
+          id: string
+          status: Database["public"]["Enums"]["checkin_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          absence_reason?: string | null
+          activity_id: string
+          created_at?: string
+          id?: string
+          status?: Database["public"]["Enums"]["checkin_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          absence_reason?: string | null
+          activity_id?: string
+          created_at?: string
+          id?: string
+          status?: Database["public"]["Enums"]["checkin_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "activity_checkins_activity_id_fkey"
+            columns: ["activity_id"]
+            isOneToOne: false
+            referencedRelation: "activities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      authorized_users: {
+        Row: {
+          created_at: string
+          display_name: string
+          email: string
+        }
+        Insert: {
+          created_at?: string
+          display_name: string
+          email: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          email?: string
+        }
+        Relationships: []
+      }
+      generated_workouts: {
+        Row: {
+          created_at: string
+          duration_minutes: number
+          equipment: string[]
+          exercises: Json
+          fitness_level: string
+          goal: string
+          guidance: string | null
+          id: string
+          limitations: string | null
+          muscle_groups: string[]
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_minutes: number
+          equipment?: string[]
+          exercises?: Json
+          fitness_level: string
+          goal: string
+          guidance?: string | null
+          id?: string
+          limitations?: string | null
+          muscle_groups?: string[]
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          duration_minutes?: number
+          equipment?: string[]
+          exercises?: Json
+          fitness_level?: string
+          goal?: string
+          guidance?: string | null
+          id?: string
+          limitations?: string | null
+          muscle_groups?: string[]
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      meals: {
+        Row: {
+          comment: string | null
+          created_at: string
+          eaten_at: string
+          id: string
+          meal_type: string
+          photo_path: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          eaten_at?: string
+          id?: string
+          meal_type: string
+          photo_path: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          eaten_at?: string
+          id?: string
+          meal_type?: string
+          photo_path?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string
+          email: string
+          equipment: string[]
+          fitness_level: string
+          goals: string[]
+          id: string
+          preferences: string | null
+          restrictions: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name: string
+          email: string
+          equipment?: string[]
+          fitness_level?: string
+          goals?: string[]
+          id: string
+          preferences?: string | null
+          restrictions?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string
+          email?: string
+          equipment?: string[]
+          fitness_level?: string
+          goals?: string[]
+          id?: string
+          preferences?: string | null
+          restrictions?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      is_authorized_user: { Args: never; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "master"
+      checkin_status: "pending" | "confirmed" | "completed" | "absent"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +407,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["master"],
+      checkin_status: ["pending", "confirmed", "completed", "absent"],
+    },
   },
 } as const
